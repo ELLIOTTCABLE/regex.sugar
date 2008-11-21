@@ -2,6 +2,17 @@
 <syntax name="expression.regex">
   <zones>
     
+    <!-- a regex with(?# comments) -->
+    <zone name="comment.inline">
+      <starts-with>
+        <expression>\(\?#</expression>
+        <capture number="0" name="punctuation.comment.begin"/>
+      </starts-with>
+      <ends-with>
+        <expression>\)</expression>
+        <capture number="0" name="punctuation.comment.end"/>
+      </ends-with>
+    </zone>
   </zones>
   
   <library>
