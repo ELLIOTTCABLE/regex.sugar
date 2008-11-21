@@ -1,7 +1,15 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <settings>
   <language id="name.elliottcable.Regex">
-    <name>Regular Expression</name>
+    <name>Regular expression</name>
+    <name locale="de">Regulärer ausdruck</name>
+    <name locale="es">Expresión regular</name>
+    <name locale="fr">Expression rationnelle</name>
+    <name locale="it">Espressione regolare</name>
+    <name locale="nl">Reguliere expressie</name>
+    <name locale="ru">Регулярные выражения</name>
+    <name locale="ja">正規表現</name>
+    <name locale="da">Regulære udtryk</name>
     
     <root-zone>expression.regex</root-zone>
     
