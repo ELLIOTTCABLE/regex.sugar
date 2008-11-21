@@ -1,0 +1,12 @@
+<?xml version="1.0"?>
+<syntax name="expression.regex">
+  <zones>
+    
+  </zones>
+  
+  <library>
+    <collection name="null">
+      
+    </collection>
+  </library>
+</syntax>

@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<settings>
+  <language id="name.elliottcable.Regex">
+    <name>Regular Expression</name>
+    
+    <root-zone>expression.regex</root-zone>
+    
+    <detectors>
+      <extension casesensitive="false">re</extension>
+      <extension casesensitive="false">rgx</extension>
+      <extension casesensitive="false">regex</extension>
+      <extension casesensitive="false">regularexpression</extension>
+    </detectors>
+    
+  </language>
+</settings>
