@@ -29,6 +29,14 @@
       </ends-with>
     </zone>
     
+    <!--
+      We're going to call linebreaks invalid outside of comments. You should
+      be using \n instead, anyway.
+    -->
+    <zone name="invalid.linebreak">
+      <expression>\n</expression>
+    </zone>
+    
   </zones>
   
   <library>
