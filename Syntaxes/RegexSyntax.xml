@@ -4,6 +4,7 @@
     
     <!-- \escape \sequences -->
     <!-- Comes first, to make sure we can escape _anything_. -->
+    <include collection="character.class.escape"/>
     <zone name="literal.character.escape">
       <expression>(\\)(.)</expression>
       <capture number="1" name="punctuation.delimiter.escape.backslash"/>
@@ -98,7 +99,7 @@
         <capture number="0" name="punctuation.character.class.end"/>
       </ends-with>
       <subzones>
-        
+        <include collection="character.classes"/>
       </subzones>
     </zone>
     
@@ -135,8 +136,22 @@
   </zones>
   
   <library>
-    <collection name="escape">
-      
+    <collection name="character.class.escape">
+      <zone name="character.class.escape">
+        <expression>\\[wWdDsS]</expression>
+      </zone>
+    </collection>
+    <collection name="character.class.category">
+      <zone name="character.class.category">
+        <expression>(\[\:)(\w+)(\:\])</expression>
+        <capture number="1" name="punctuation.character.class.predefined.begin"/>
+        <capture number="2" name="character.class.name"/>
+        <capture number="3" name="punctuation.character.class.predefined.end"/>
+      </zone>
+    </collection>
+    <collection name="character.classes">
+      <include collection="character.class.escape"/>
+      <include collection="character.class.category"/>
     </collection>
   </library>
 </syntax>
