@@ -43,6 +43,20 @@
       </ends-with>
     </zone>
     
+    <zone name="group">
+      <starts-with>
+        <expression>\(</expression>
+        <capture number="0" name="punctuation.group.begin"/>
+      </starts-with>
+      <ends-with>
+        <expression>\)</expression>
+        <capture number="0" name="punctuation.group.end"/>
+      </ends-with>
+      <subzones>
+        <include syntax="self"/>
+      </subzones>
+    </zone>
+    
     <!--
       We're going to call linebreaks invalid outside of comments. You should
       be using \n instead, anyway. If you really want to use a literal

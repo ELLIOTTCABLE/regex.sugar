@@ -15,3 +15,10 @@ linebreak-comment punctuation.linebreak-comment.end {
 literal.escape {
   font-weight: bold;
 }
+
+group punctuation.group.begin,
+group punctuation.group.end {
+  color: #007D14;
+}
+
+group:not(begin):not(end) { background: rgba(0, 255, 127.5, 0.15); }
