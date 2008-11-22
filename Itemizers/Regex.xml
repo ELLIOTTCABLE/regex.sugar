@@ -1,7 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <itemizer>
   
-	<library>
-	  
-	</library>
+  <recipe name="group.hidden">
+    <start-selector>group > group.begin</start-selector>
+    <end-selector>group.end</end-selector>
+    
+    <subrecipes>
+      <include-root-recipes/>
+    </subrecipes>
+  </recipe>
+  
 </itemizer>

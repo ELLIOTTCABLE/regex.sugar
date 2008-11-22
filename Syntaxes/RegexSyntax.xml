@@ -43,14 +43,45 @@
       </ends-with>
     </zone>
     
-    <zone name="group">
+    <zone name="anonymous.group">
       <starts-with>
-        <expression>\(</expression>
-        <capture number="0" name="punctuation.group.begin"/>
+        <expression>\(\?\:</expression>
+        <capture number="0" name="punctuation.anonymous.group.begin"/>
       </starts-with>
       <ends-with>
         <expression>\)</expression>
-        <capture number="0" name="punctuation.group.end"/>
+        <capture number="0" name="punctuation.anonymous.group.end"/>
+      </ends-with>
+      <subzones>
+        <include syntax="self"/>
+      </subzones>
+    </zone>
+    
+    <zone name="named.capturing.group">
+      <starts-with>
+        <expression>(\()(\?P\&lt;)(\w+)(\&gt;)</expression>
+        <capture number="1" name="punctuation.named.capturing.group.begin"/>
+        <capture number="2" name="punctuation.capture.name.begin"/>
+        <capture number="3" name="capture.name"/>
+        <capture number="4" name="punctuation.capture.name.end"/>
+      </starts-with>
+      <ends-with>
+        <expression>\)</expression>
+        <capture number="0" name="punctuation.named.capturing.group.end"/>
+      </ends-with>
+      <subzones>
+        <include syntax="self"/>
+      </subzones>
+    </zone>
+    
+    <zone name="numbered.capturing.group">
+      <starts-with>
+        <expression>\(</expression>
+        <capture number="0" name="punctuation.numbered.capturing.group.begin"/>
+      </starts-with>
+      <ends-with>
+        <expression>\)</expression>
+        <capture number="0" name="punctuation.numbered.capturing.group.end"/>
       </ends-with>
       <subzones>
         <include syntax="self"/>

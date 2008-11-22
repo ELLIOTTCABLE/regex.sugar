@@ -17,3 +17,8 @@ And then link it to your syntaxes directory:
     mkdir -p "~/Library/Application Support/Espresso/Sugars/"
     ln -s "$(pwd)/Regex.sugar" "/Users/$(whoami)/Library/Application Support/Espresso/Sugars/"
     
+TODO
+----
+- Write a custom Itemizer class so that capture groups can show their capture
+  number in the Navigator, just like how named capture groups will be capable
+  of doing.
