@@ -102,6 +102,27 @@
       </subzones>
     </zone>
     
+    <zone name="operator.alternator">
+      <expression>\|</expression>
+    </zone>
+    <zone name="operator.general.quantifier">
+      <expression>\?|\*|\+</expression>
+    </zone>
+    <zone name="operator.declarative.quantifier">
+      <expression>(\{)(\d*)(,)(\d*)(\})</expression>
+      <capture number="1" name="punctuation.declarative.quantifier.begin"/>
+      <capture number="2" name="numeric.declarative.quantifier.value.minimum"/>
+      <capture number="3" name="punctuation.declarative.quantifier.seperator"/>
+      <capture number="4" name="numeric.declarative.quantifier.value.maximum"/>
+      <capture number="5" name="punctuation.declarative.quantifier.end"/>
+    </zone>
+    <zone name="operator.positional">
+      <expression>\^|\$|\\[bAZz]</expression>
+    </zone>
+    <zone name="anonymous.backreference">
+      <expression>\\\d</expression>
+    </zone>
+    
     <!--
       We're going to call linebreaks invalid outside of comments. You should
       be using \n instead, anyway. If you really want to use a literal
