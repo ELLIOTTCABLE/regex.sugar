@@ -11,3 +11,7 @@ linebreak-comment punctuation.linebreak-comment.begin,
 linebreak-comment punctuation.linebreak-comment.end {
   color: #D0D0D0;
 }
+
+literal.escape {
+  font-weight: bold;
+}
