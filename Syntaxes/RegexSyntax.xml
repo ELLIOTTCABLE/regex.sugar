@@ -7,7 +7,7 @@
     <zone name="literal.character.escape">
       <expression>(\\)(.)</expression>
       <capture number="1" name="punctuation.delimiter.escape.backslash"/>
-      <capture number="2" name="character.escape"/>
+      <capture number="2" name="character"/>
     </zone>
     
     <!-- a regex with(?# comments) -->
