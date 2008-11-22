@@ -2,6 +2,14 @@
 <syntax name="expression.regex">
   <zones>
     
+    <!-- \escape \sequences -->
+    <!-- Comes first, to make sure we can escape _anything_. -->
+    <zone name="literal.character.escape">
+      <expression>(\\)(.)</expression>
+      <capture number="1" name="punctuation.delimiter.escape.backslash"/>
+      <capture number="2" name="character.escape"/>
+    </zone>
+    
     <!-- a regex with(?# comments) -->
     <!--
       A bit of a hack, but I don't want the common idiom of utilizing a
