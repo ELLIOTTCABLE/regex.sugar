@@ -9,6 +9,12 @@
       <capture number="1" name="punctuation.delimiter.escape.backslash"/>
       <capture number="2" name="character"/>
     </zone>
+    <!-- Have to explicitly use linebreaks. -->
+    <zone name="literal.character.escape.newline">
+      <expression>(\\)(\n)</expression>
+      <capture number="1" name="punctuation.delimiter.escape.backslash"/>
+      <capture number="2" name="character.newline"/>
+    </zone>
     
     <!-- a regex with(?# comments) -->
     <!--
@@ -39,7 +45,8 @@
     
     <!--
       We're going to call linebreaks invalid outside of comments. You should
-      be using \n instead, anyway.
+      be using \n instead, anyway. If you really want to use a literal
+      linebreak, just escape it with a slash at the end of the previous line.
     -->
     <zone name="invalid.linebreak">
       <expression>\n</expression>
