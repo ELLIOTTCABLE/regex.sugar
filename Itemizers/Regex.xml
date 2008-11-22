@@ -1,8 +1,28 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <itemizer>
   
-  <recipe name="group.hidden">
-    <start-selector>group > group.begin</start-selector>
+  <recipe name="named.group">
+    <!--
+      This is bugged. I can get my group's names into the Navigator, but
+      then I'm left with an itemizer that misses it's opening tag as a part of
+      the item. The following should be possible instead:
+          
+          named.capturing.group > group.begin:capture(itemizer-firstused) ~ capture.name:not(punctuation):capture(name)
+          
+      Unfortunately, either I've done something wrong, or there's a bug in the
+      engine and we can't do that.
+    -->
+    <start-selector>named.capturing.group > capture.name:not(punctuation):capture(name)</start-selector>
+    <end-selector>group.end</end-selector>
+    
+    <subrecipes>
+      <include-root-recipes/>
+    </subrecipes>
+  </recipe>
+  
+  <recipe name="anonymous.group">
+    <class>ESCodeBlockItem</class>
+    <start-selector>anonymous.group > group.begin</start-selector>
     <end-selector>group.end</end-selector>
     
     <subrecipes>
