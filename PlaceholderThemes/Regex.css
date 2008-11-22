@@ -4,5 +4,10 @@
 */
 
 linebreak-comment {
+  color: #AAAAAA;
+}
+
+linebreak-comment punctuation.linebreak-comment.begin,
+linebreak-comment punctuation.linebreak-comment.end {
   color: #D0D0D0;
 }
