@@ -18,11 +18,9 @@ literal.escape {
 
 group punctuation.group.begin,
 group punctuation.group.end {
-  color: #0e757d
-  ;
+  color: #3a1d72;
 }
 
-group.capturing:not(begin):not(end) { background: rgba(28, 238, 255, 0.15); }
-group.anonymous:not(begin):not(end) { background: rgba(127.5, 127.5, 127.5, 0.15); }
+group:not(begin):not(end) { background: rgba(148, 115, 219, 0.15); }
 
-character.class { color: #4E279A; }
+character.class { color: #2F6F9F; }
