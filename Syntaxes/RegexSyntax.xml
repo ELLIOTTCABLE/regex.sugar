@@ -4,12 +4,7 @@
     
     <!-- \escape \sequences -->
     <!-- Comes first, to make sure we can escape _anything_. -->
-    <include collection="character.class.escape"/>
-    <zone name="literal.character.escape">
-      <expression>(\\)(.)</expression>
-      <capture number="1" name="punctuation.delimiter.escape.backslash"/>
-      <capture number="2" name="character"/>
-    </zone>
+    <include collection="single.character.escape"/>
     <!-- Have to explicitly use linebreaks. -->
     <zone name="literal.character.escape.newline">
       <expression>(\\)(\n)</expression>
@@ -99,6 +94,7 @@
         <capture number="0" name="punctuation.character.class.end"/>
       </ends-with>
       <subzones>
+        <include collection="single.character.escape"/>
         <include collection="character.classes"/>
       </subzones>
     </zone>
@@ -136,6 +132,14 @@
   </zones>
   
   <library>
+    <collection name="single.character.escape">
+      <include collection="character.class.escape"/>
+      <zone name="literal.character.escape">
+        <expression>(\\)(.)</expression>
+        <capture number="1" name="punctuation.delimiter.escape.backslash"/>
+        <capture number="2" name="character"/>
+      </zone>
+    </collection>
     <collection name="character.class.escape">
       <zone name="character.class.escape">
         <expression>\\[wWdDsS]</expression>
