@@ -5,15 +5,16 @@
     <!--
       This is bugged. I can get my group's names into the Navigator, but
       then I'm left with an itemizer that misses it's opening tag as a part of
-      the item. The following should be possible instead:
+      the item. Either of the following should be possible instead:
           
           named.capturing.group > group.begin:capture(itemizer-firstused) ~ capture.name:not(punctuation):capture(name)
+          named.capturing.group:has-child(capture.name:not(punctuation):capture(name)) > group.begin
           
       Unfortunately, either I've done something wrong, or there's a bug in the
       engine and we can't do that.
     -->
-    <start-selector>named.capturing.group > capture.name:not(punctuation):capture(name)</start-selector>
-    <end-selector>group.end</end-selector>
+    <start-selector>named.capturing.group.begin:capture(itemizer-firstused) ~ capture.name:not(punctuation):capture(name)</start-selector>
+    <end-selector>named.capturing.group.begin</end-selector>
     
     <subrecipes>
       <include-root-recipes/>
