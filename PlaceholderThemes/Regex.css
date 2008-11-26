@@ -13,7 +13,6 @@ linebreak-comment punctuation.linebreak-comment.end {
 }
 
 literal.escape {
-	color: #000000;
   font-weight: bold;
 }
 
