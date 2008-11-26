@@ -176,6 +176,12 @@
       <zone name="character.class.escape">
         <expression>\\[wWdDsS]</expression>
       </zone>
+      <zone name="character.class.escape.unicode">
+        <expression>(\\u)(\d{4})|(\\x\{)(\d{4})(\})</expression>
+        <capture number="1" name="punctuation.delimiter.begin"/>
+        <capture number="2" name="codepoint"/>
+        <capture number="3" name="punctuation.delimiter.end"/>
+      </zone>
     </collection>
   </library>
 </syntax>
