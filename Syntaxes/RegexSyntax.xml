@@ -147,7 +147,10 @@
       <capture number="5" name="punctuation.declarative.quantifier.end"/>
     </zone>
     <zone name="operator.anchor">
-      <expression>\^|\$|\\[bByYmMAZz`'&lt;>]</expression>
+      <expression>\^|\$</expression>
+    </zone>
+    <zone name="operator.anchor.escaped">
+      <expression>\\[bByYmMAZz`'&lt;>]</expression>
     </zone>
     <zone name="anonymous.backreference">
       <expression>\\\d</expression>
