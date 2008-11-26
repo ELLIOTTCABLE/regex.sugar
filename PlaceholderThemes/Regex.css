@@ -13,14 +13,15 @@ linebreak-comment punctuation.linebreak-comment.end {
 }
 
 literal.escape {
+	color: #000000;
   font-weight: bold;
 }
 
-group punctuation.group.begin,
-group punctuation.group.end {
-  color: #3a1d72;
+group group.begin,
+group group.end {
+  color: rgba(0, 0, 0, 0.50);
 }
 
-group:not(begin):not(end) { background: rgba(148, 115, 219, 0.15); }
+group:not(begin):not(end) { background: rgba(127.5, 127.5, 127.5, 0.15); }
 
-character.class { color: #2F6F9F; }
+character.class { color: #D44950; }

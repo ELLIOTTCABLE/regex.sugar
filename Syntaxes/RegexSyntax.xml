@@ -55,6 +55,7 @@
     <zone name="named.capturing.group">
       <starts-with>
         <expression>(\()(\?P\&lt;)(\w+)(\&gt;)</expression>
+        <capture number="0" name="named.capturing.group.begin"/>
         <capture number="1" name="punctuation.named.capturing.group.begin"/>
         <capture number="2" name="punctuation.capture.name.begin"/>
         <capture number="3" name="capture.name"/>
