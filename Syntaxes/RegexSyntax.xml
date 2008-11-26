@@ -182,6 +182,12 @@
         <capture number="2" name="codepoint"/>
         <capture number="3" name="punctuation.delimiter.end"/>
       </zone>
+      <zone name="character.class.escape.unicode.block">
+        <expression>(\\p)([A-Za-z])|(\\p\{)([A-Za-z _-]+)(\})</expression>
+        <capture number="1" name="punctuation.delimiter.begin"/>
+        <capture number="2" name="block-name"/>
+        <capture number="3" name="punctuation.delimiter.end"/>
+      </zone>
     </collection>
   </library>
 </syntax>
