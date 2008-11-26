@@ -3,14 +3,26 @@
   <zones>
     
     <!-- \escape \sequences -->
-    <!-- Comes first, to make sure we can escape _anything_. -->
-    <include collection="single.character.escape"/>
-    <!-- Have to explicitly use linebreaks. -->
+    <zone name="literal.escape.sequence">
+      <starts-with>
+        <expression>\\Q</expression>
+        <capture number="0" name="delimiter.escape.begin.Q"/>
+      </starts-with>
+      <ends-with>
+        <expression>\\E</expression>
+        <capture number="0" name="delimiter.escape.end.E"/>
+      </ends-with>
+    </zone>
+    
+    <!-- This is available if you absolutely must have raw newlines -->
     <zone name="literal.character.escape.newline">
       <expression>(\\)(\n)</expression>
       <capture number="1" name="punctuation.delimiter.escape.backslash"/>
       <capture number="2" name="character.newline"/>
     </zone>
+    
+    <!-- Have to make sure we can escape anything, anywhere, and it won't be caught by other syntax zones. -->
+    <include collection="single.character.escape"/>
     
     <!-- a regex with(?# comments) -->
     <!--
