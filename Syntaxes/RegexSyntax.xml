@@ -125,7 +125,7 @@
       <capture number="4" name="numeric.declarative.quantifier.value.maximum"/>
       <capture number="5" name="punctuation.declarative.quantifier.end"/>
     </zone>
-    <zone name="operator.positional">
+    <zone name="operator.anchor">
       <expression>\^|\$|\\[bAZz]</expression>
     </zone>
     <zone name="anonymous.backreference">
