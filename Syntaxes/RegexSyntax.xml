@@ -126,7 +126,7 @@
       <capture number="5" name="punctuation.declarative.quantifier.end"/>
     </zone>
     <zone name="operator.anchor">
-      <expression>\^|\$|\\[bAZz]</expression>
+      <expression>\^|\$|\\[bAZz`']</expression>
     </zone>
     <zone name="anonymous.backreference">
       <expression>\\\d</expression>
