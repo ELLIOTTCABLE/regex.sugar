@@ -95,8 +95,14 @@
         <capture number="0" name="punctuation.character.class.end"/>
       </ends-with>
       <subzones>
+        <include collection="character.class.escape"/>
         <include collection="single.character.escape"/>
-        <include collection="character.classes"/>
+        <zone name="character.class.category">
+          <expression>(\[\:)(\w+)(\:\])</expression>
+          <capture number="1" name="punctuation.character.class.predefined.begin"/>
+          <capture number="2" name="character.class.name"/>
+          <capture number="3" name="punctuation.character.class.predefined.end"/>
+        </zone>
       </subzones>
     </zone>
     
@@ -145,18 +151,6 @@
       <zone name="character.class.escape">
         <expression>\\[wWdDsS]</expression>
       </zone>
-    </collection>
-    <collection name="character.class.category">
-      <zone name="character.class.category">
-        <expression>(\[\:)(\w+)(\:\])</expression>
-        <capture number="1" name="punctuation.character.class.predefined.begin"/>
-        <capture number="2" name="character.class.name"/>
-        <capture number="3" name="punctuation.character.class.predefined.end"/>
-      </zone>
-    </collection>
-    <collection name="character.classes">
-      <include collection="character.class.escape"/>
-      <include collection="character.class.category"/>
     </collection>
   </library>
 </syntax>
