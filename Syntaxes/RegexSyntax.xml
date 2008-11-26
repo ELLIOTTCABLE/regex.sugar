@@ -123,7 +123,12 @@
     </zone>
     
     <zone name="character.class.any">
-      <expression>\.|\\X</expression>
+      <expression>\.</expression>
+      <capture number="0" name="punctuation.character.class.any"/>
+    </zone>
+    
+    <zone name="character.class.any.unicode">
+      <expression>\\X</expression>
       <capture number="0" name="punctuation.character.class.any"/>
     </zone>
     
