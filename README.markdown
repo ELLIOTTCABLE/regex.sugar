@@ -22,3 +22,4 @@ TODO
 - Write a custom Itemizer class so that capture groups can show their capture
   number in the Navigator, just like how named capture groups will be capable
   of doing.
+- [Conditionals](http://www.regular-expressions.info/conditional.html "Regular Expression Conditionals")
