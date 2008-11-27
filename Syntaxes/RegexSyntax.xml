@@ -2,7 +2,9 @@
 <syntax name="expression.regex">
   <zones>
     
-    <!-- \escape \sequences -->
+    <!-- ======================
+         = \escape \sequences =
+         ====================== -->
     <zone name="literal.escape.sequence">
       <starts-with>
         <expression>\\Q</expression>
@@ -21,8 +23,31 @@
       <capture number="2" name="character.newline"/>
     </zone>
     
+    <zone name="character.class.any.unicode">
+      <expression>\\X</expression>
+      <capture number="0" name="punctuation.character.class.any"/>
+    </zone>
+    <zone name="operator.anchor.escaped">
+      <expression>\\[bByYmMAZz`'&lt;>]</expression>
+    </zone>
+    <zone name="anonymous.backreference">
+      <expression>\\\d</expression>
+    </zone>
+    <zone name="named.backreference">
+      <expression>((\\g)(&lt;))(\w+)(>)</expression>
+      <capture number="1" name="named.backreference.begin"/>
+      <capture number="2" name="punctuation.named.backreference.begin"/>
+      <capture number="3" name="punctuation.backreference.name.begin"/>
+      <capture number="4" name="backreference.name"/>
+      <capture number="5" name="punctuation.backreference.name.end"/>
+    </zone>
+    
     <!-- Have to make sure we can escape anything, anywhere, and it won't be caught by other syntax zones. -->
     <include collection="single.character.escape"/>
+    
+    <!-- ==============
+         = Structures =
+         ============== -->
     
     <!-- a regex with(?# comments) -->
     <!--
@@ -127,11 +152,6 @@
       <capture number="0" name="punctuation.character.class.any"/>
     </zone>
     
-    <zone name="character.class.any.unicode">
-      <expression>\\X</expression>
-      <capture number="0" name="punctuation.character.class.any"/>
-    </zone>
-    
     <zone name="operator.alternator">
       <expression>\|</expression>
     </zone>
@@ -148,20 +168,6 @@
     </zone>
     <zone name="operator.anchor">
       <expression>\^|\$</expression>
-    </zone>
-    <zone name="operator.anchor.escaped">
-      <expression>\\[bByYmMAZz`'&lt;>]</expression>
-    </zone>
-    <zone name="anonymous.backreference">
-      <expression>\\\d</expression>
-    </zone>
-    <zone name="named.backreference">
-      <expression>((\\g)(&lt;))(\w+)(>)</expression>
-      <capture number="1" name="named.backreference.begin"/>
-      <capture number="2" name="punctuation.named.backreference.begin"/>
-      <capture number="3" name="punctuation.backreference.name.begin"/>
-      <capture number="4" name="backreference.name"/>
-      <capture number="5" name="punctuation.backreference.name.end"/>
     </zone>
     
     <!--
