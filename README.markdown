@@ -1,10 +1,12 @@
 Regex.sugar
 ===========
 A Sugar for the [Espresso text editor][espresso] to develop complicated
-[Regular Expressions][regex].
+[Regular Expressions][regex]. It should support anything described in the
+[reference][] provided by <http://regular-expressions.info>.
 
 [espresso]: <http://macrabbit.com/espresso/> "The Espresso text editor, by MacRabbit"
 [regex]: <http://en.wikipedia.org/wiki/Regular_Expression> "Regular Expression as defined by Wikipedia"
+[reference]: <http://regular-expressions.info/reference.html> "Regular Expression Reference"
 
 Using
 -----
@@ -22,4 +24,4 @@ TODO
 - Write a custom Itemizer class so that capture groups can show their capture
   number in the Navigator, just like how named capture groups will be capable
   of doing.
-- [Conditionals](http://www.regular-expressions.info/conditional.html "Regular Expression Conditionals")
+- [Conditionals](http://regular-expressions.info/conditional.html "Regular Expression Conditionals")
