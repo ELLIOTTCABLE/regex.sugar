@@ -28,7 +28,7 @@
       <capture number="0" name="punctuation.character.class.any"/>
     </zone>
     <zone name="operator.anchor.escaped">
-      <expression>\\[bByYmMAZz`'&lt;>]</expression>
+      <expression>\\[GbByYmMAZz`'&lt;>]</expression>
     </zone>
     <zone name="anonymous.backreference">
       <expression>\\\d</expression>
