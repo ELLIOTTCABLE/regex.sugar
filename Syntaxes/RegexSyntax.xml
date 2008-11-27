@@ -78,7 +78,7 @@
     <!-- (groups) -->
     <zone name="anonymous.group">
       <starts-with>
-        <expression>\(\?\:</expression>
+        <expression>\(\?(\:|&lt;?(=|!))</expression>
         <capture number="0" name="punctuation.anonymous.group.begin"/>
       </starts-with>
       <ends-with>
