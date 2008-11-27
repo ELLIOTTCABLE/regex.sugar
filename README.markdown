@@ -2,7 +2,10 @@ Regex.sugar
 ===========
 A Sugar for the [Espresso text editor][espresso] to develop complicated
 [Regular Expressions][regex]. It should support anything described in the
-[reference][] provided by <http://regular-expressions.info>.
+[reference][] provided by <http://regular-expressions.info>. In cases where a
+feature is only supported by a subset of the available regular expression
+engines, I attempt to support it as well as possible without conflicting with
+any alternatives provided by other engines.
 
 [espresso]: <http://macrabbit.com/espresso/> "The Espresso text editor, by MacRabbit"
 [regex]: <http://en.wikipedia.org/wiki/Regular_Expression> "Regular Expression as defined by Wikipedia"
