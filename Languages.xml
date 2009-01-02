@@ -21,4 +21,12 @@
     </detectors>
     
   </language>
+  
+  <meta>
+    <name>Regex</name>
+    <author>elliottcable</author>
+    <identifier>name.elliottcable.Sugar.Regex</identifier>
+    <download format="raw">file:///Users/elliottcable/Code/regex.sugar</download>
+    <url>http://github.com/elliottcable/regex.sugar</url>
+  </meta>
 </settings>
