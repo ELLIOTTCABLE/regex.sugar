@@ -24,6 +24,7 @@
   
   <meta>
     <name>Regex</name>
+    <description>Mostly meant for inclusion into other sugars, this sugar fully describes regular expressions, and allows you to break them down and modify them with ease</description>
     <author>elliottcable</author>
     <identifier>name.elliottcable.Sugar.Regex</identifier>
     <download format="git">git://github.com/elliottcable/regex.sugar.git</download>
