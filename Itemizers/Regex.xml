@@ -13,8 +13,8 @@
       Unfortunately, either I've done something wrong, or there's a bug in the
       engine and we can't do that.
     -->
-    <start-selector>named.capturing.group.begin:capture(itemizer-firstused) ~ capture.name:not(punctuation):capture(name)</start-selector>
-    <end-selector>named.capturing.group.begin</end-selector>
+    <start-selector>container.group.capturing.named:capture(itemizer-firstused) ~ capture-name:not(punctuation):capture(name)</start-selector>
+    <end-selector>group.capturing.named.end</end-selector>
     
     <subrecipes>
       <include-root-recipes/>
@@ -23,8 +23,8 @@
   
   <recipe name="anonymous.group">
     <class>ESCodeBlockItem</class>
-    <start-selector>anonymous.group > group.begin</start-selector>
-    <end-selector>group.end</end-selector>
+    <start-selector>container.group.anonymous > punctuation.group.begin</start-selector>
+    <end-selector>container.group.anonymous > punctuation.group.end</end-selector>
     
     <subrecipes>
       <include-root-recipes/>

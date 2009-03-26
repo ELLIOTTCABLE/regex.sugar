@@ -1,210 +1,264 @@
 <?xml version="1.0"?>
 <syntax name="expression.regex">
+  <!--
+    We break this document down into a huge library of collections, and an
+    utterly simplistic primary zones section that does nothing more than
+    `include` the correct collections in the correct order. This allows us to
+    re-use groups of zones easily, as well as allowing us to order the
+    elements of the document however we want to, without having to worry too
+    much about precedence (since we can re-order the include statements
+    however we need to, to preserve the precedence of syntax elements'
+    matching rules).
+  -->
   <zones>
-    
-    <!-- ======================
-         = \escape \sequences =
-         ====================== -->
-    <zone name="literal.escape.sequence">
-      <starts-with>
-        <expression>\\Q</expression>
-        <capture number="0" name="delimiter.escape.begin.Q"/>
-      </starts-with>
-      <ends-with>
-        <expression>\\E</expression>
-        <capture number="0" name="delimiter.escape.end.E"/>
-      </ends-with>
-    </zone>
-    
-    <!-- This is available if you absolutely must have raw newlines -->
-    <zone name="literal.character.escape.newline">
-      <expression>(\\)(\n)</expression>
-      <capture number="1" name="punctuation.delimiter.escape.backslash"/>
-      <capture number="2" name="character.newline"/>
-    </zone>
-    
-    <zone name="character.class.any.unicode">
-      <expression>\\X</expression>
-      <capture number="0" name="punctuation.character.class.any"/>
-    </zone>
-    <zone name="operator.anchor.escaped">
-      <expression>\\[GbByYmMAZz`'&lt;>]</expression>
-    </zone>
-    <zone name="anonymous.backreference">
-      <expression>\\\d</expression>
-    </zone>
-    <zone name="named.backreference">
-      <expression>((\\g)(&lt;))(\w+)(>)</expression>
-      <capture number="1" name="named.backreference.begin"/>
-      <capture number="2" name="punctuation.named.backreference.begin"/>
-      <capture number="3" name="punctuation.backreference.name.begin"/>
-      <capture number="4" name="backreference.name"/>
-      <capture number="5" name="punctuation.backreference.name.end"/>
-    </zone>
-    
-    <!-- Have to make sure we can escape anything, anywhere, and it won't be caught by other syntax zones. -->
-    <include collection="single.character.escape"/>
-    
-    <!-- ==============
-         = Structures =
-         ============== -->
-    
-    <!-- a regex with(?# comments) -->
-    <!--
-      A bit of a hack, but I don't want the common idiom of utilizing a
-      comment to allow linebreaks to show up in the navigator.
-    -->
-    <zone name="linebreak-comment">
-      <starts-with>
-        <expression>\(\?#\n</expression>
-        <capture number="0" name="punctuation.linebreak-comment.begin"/>
-      </starts-with>
-      <ends-with>
-        <expression>\)</expression>
-        <capture number="0" name="punctuation.linebreak-comment.end"/>
-      </ends-with>
-    </zone>
-    <zone name="comment.inline">
-      <starts-with>
-        <expression>\(\?#</expression>
-        <capture number="0" name="punctuation.comment.begin"/>
-      </starts-with>
-      <ends-with>
-        <expression>\)</expression>
-        <capture number="0" name="punctuation.comment.end"/>
-      </ends-with>
-    </zone>
-    
-    <!-- (groups) -->
-    <zone name="anonymous.group">
-      <starts-with>
-        <expression>\(\?(\:|&lt;?(=|!))</expression>
-        <capture number="0" name="punctuation.anonymous.group.begin"/>
-      </starts-with>
-      <ends-with>
-        <expression>\)</expression>
-        <capture number="0" name="punctuation.anonymous.group.end"/>
-      </ends-with>
-      <subzones>
-        <include syntax="self"/>
-      </subzones>
-    </zone>
-    <zone name="named.capturing.group">
-      <starts-with>
-        <!--
-          This regex really isn't ideal. It will match some things that
-          certainly aren't correct, such as `(?<abc<)` or `(?'abc>)`.
-        -->
-        <expression>(\(\?)P?('|&lt;)(\w+)(\2|>)</expression>
-        <capture number="0" name="named.capturing.group.begin"/>
-        <capture number="1" name="punctuation.named.capturing.group.begin"/>
-        <capture number="2" name="punctuation.capture.name.begin"/>
-        <capture number="3" name="capture.name"/>
-        <capture number="4" name="punctuation.capture.name.end"/>
-      </starts-with>
-      <ends-with>
-        <expression>\)</expression>
-        <capture number="0" name="punctuation.named.capturing.group.end"/>
-      </ends-with>
-      <subzones>
-        <include syntax="self"/>
-      </subzones>
-    </zone>
-    <zone name="numbered.capturing.group">
-      <starts-with>
-        <expression>\(</expression>
-        <capture number="0" name="punctuation.numbered.capturing.group.begin"/>
-      </starts-with>
-      <ends-with>
-        <expression>\)</expression>
-        <capture number="0" name="punctuation.numbered.capturing.group.end"/>
-      </ends-with>
-      <subzones>
-        <include syntax="self"/>
-      </subzones>
-    </zone>
-    
-    <!-- [A-Za-z0-9_-] -->
-    <zone name="character.class">
-      <starts-with>
-        <expression>(\[)(\^)?</expression>
-        <capture number="1" name="punctuation.character.class.begin"/>
-        <capture number="2" name="punctuation.character.class.negated"/>
-      </starts-with>
-      <ends-with>
-        <expression>\]</expression>
-        <capture number="0" name="punctuation.character.class.end"/>
-      </ends-with>
-      <subzones>
-        <include collection="character.class.escape"/>
-        <include collection="single.character.escape"/>
-        <zone name="character.class.category">
-          <expression>(\[\:)(\w+)(\:\])</expression>
-          <capture number="1" name="punctuation.character.class.predefined.begin"/>
-          <capture number="2" name="character.class.name"/>
-          <capture number="3" name="punctuation.character.class.predefined.end"/>
-        </zone>
-      </subzones>
-    </zone>
-    
-    <zone name="character.class.any">
-      <expression>\.</expression>
-      <capture number="0" name="punctuation.character.class.any"/>
-    </zone>
-    
-    <zone name="operator.alternator">
-      <expression>\|</expression>
-    </zone>
-    <zone name="operator.general.quantifier">
-      <expression>\?|\*|\+</expression>
-    </zone>
-    <zone name="operator.declarative.quantifier">
-      <expression>(\{)(\d*)(,)(\d*)(\})</expression>
-      <capture number="1" name="punctuation.declarative.quantifier.begin"/>
-      <capture number="2" name="numeric.declarative.quantifier.value.minimum"/>
-      <capture number="3" name="punctuation.declarative.quantifier.seperator"/>
-      <capture number="4" name="numeric.declarative.quantifier.value.maximum"/>
-      <capture number="5" name="punctuation.declarative.quantifier.end"/>
-    </zone>
-    <zone name="operator.anchor">
-      <expression>\^|\$</expression>
-    </zone>
-    
-    <!--
-      We're going to call linebreaks invalid outside of comments. You should
-      be using \n instead, anyway. If you really want to use a literal
-      linebreak, just escape it with a slash at the end of the previous line.
-    -->
-    <zone name="invalid.linebreak">
-      <expression>\n</expression>
-    </zone>
-    
+    <include collection="escapes.specific"/>
+    <include collection="escapes.character-classes"/>
+    <include collection="escapes.operators"/>
+    <include collection="escapes.backreferences"/>
+    <include collection="escapes.global"/>
+    <include collection="comments"/>
+    <include collection="groups"/>
+    <include collection="character-classes"/>
+    <include collection="operators.character-classes"/>
+    <include collection="operators"/>
+    <include collection="invalids"/>
   </zones>
   
   <library>
-    <collection name="single.character.escape">
-      <include collection="character.class.escape"/>
-      <zone name="literal.character.escape">
+    
+    <!-- =============
+         = literal.* =
+         ============= -->
+    
+    <collection name="escapes.specific">
+      <!-- \Qan escaped sequence\E -->
+      <zone name="literal.escape.sequence">
+        <starts-with>
+          <expression>\\Q</expression>
+          <capture number="0" name="delimiter.escape.begin.Q"/>
+        </starts-with>
+        <ends-with>
+          <expression>\\E</expression>
+          <capture number="0" name="delimiter.escape.end.E"/>
+        </ends-with>
+      </zone>
+      
+      <!-- \(\n) - is this necessary? -->
+      <zone name="literal.escape.character.newline">
+        <expression>(\\)(\n)</expression>
+        <capture number="1" name="punctuation.delimiter.escape.backslash"/>
+        <capture number="2" name="character.newline"/>
+      </zone>
+    </collection>
+    
+    <collection name="escapes.global">
+      <!-- \( -->
+      <zone name="literal.escape.character">
         <expression>(\\)(.)</expression>
         <capture number="1" name="punctuation.delimiter.escape.backslash"/>
         <capture number="2" name="character"/>
       </zone>
     </collection>
-    <collection name="character.class.escape">
-      <zone name="character.class.escape">
+    
+    <!-- ================
+         = identifier.* =
+         ================ -->
+    
+    <collection name="escapes.character-classes">
+      <zone name="identifier.character-class.escape">
         <expression>\\[wWdDsS]</expression>
       </zone>
-      <zone name="character.class.escape.unicode">
+      
+      <zone name="identifier.character-class.any.unicode">
+        <expression>\\X</expression>
+      </zone>
+      
+      <zone name="identifier.character-class.escape.unicode">
         <expression>(\\u)(\d{4})|(\\x\{)(\d{4})(\})</expression>
         <capture number="1" name="punctuation.delimiter.begin"/>
         <capture number="2" name="codepoint"/>
         <capture number="3" name="punctuation.delimiter.end"/>
       </zone>
-      <zone name="character.class.escape.unicode.block">
+      
+      <zone name="identifier.character-class.escape.unicode.block">
         <expression>(\\p)([A-Za-z])|(\\p\{)([A-Za-z _-]+)(\})</expression>
         <capture number="1" name="punctuation.delimiter.begin"/>
         <capture number="2" name="block-name"/>
         <capture number="3" name="punctuation.delimiter.end"/>
+      </zone>
+    </collection>
+    
+    <collection name="escapes.backreferences">
+      <zone name="identifier.backreference.anonymous">
+        <expression>\\\d</expression>
+      </zone>
+      
+      <zone name="identifier.backreference.named">
+        <expression>((\\g)(&lt;))(\w+)(>)</expression>
+        <capture number="1" name="identifier.backreference.named.begin"/>
+        <capture number="2" name="punctuation.backreference.named.begin"/>
+        <capture number="3" name="punctuation.backreference.name.begin"/>
+        <capture number="4" name="backreference.name"/>
+        <capture number="5" name="punctuation.backreference.name.end"/>
+      </zone>
+    </collection>
+    
+    <collection name="character-classes">
+      <!-- [A-Za-z0-9_-] -->
+      <zone name="identifier.character-class">
+        <starts-with>
+          <expression>(\[)(\^)?</expression>
+          <capture number="1" name="punctuation.character-class.begin"/>
+          <capture number="2" name="punctuation.character-class.negated"/>
+        </starts-with>
+        <ends-with>
+          <expression>\]</expression>
+          <capture number="0" name="punctuation.character-class.end"/>
+        </ends-with>
+        <subzones>
+          <include collection="escapes.character-classes"/>
+          <include collection="escapes.global"/>
+          <zone name="identifier.character-class.category">
+            <expression>(\[\:)(\w+)(\:\])</expression>
+            <capture number="1" name="punctuation.character-class.category.begin"/>
+            <capture number="2" name="character-class.name"/>
+            <capture number="3" name="punctuation.character-class.category.end"/>
+          </zone>
+        </subzones>
+      </zone>
+    </collection>
+    
+    <!-- ===============
+         = container.* =
+         =============== -->
+    
+    <collection name="groups">
+      <!-- (groups) -->
+      <zone name="container.group.anonymous">
+        <starts-with>
+          <expression>\(\?(\:|&lt;?(=|!))</expression>
+          <capture number="0" name="punctuation.group.anonymous.begin"/>
+        </starts-with>
+        <ends-with>
+          <expression>\)</expression>
+          <capture number="0" name="punctuation.group.anonymous.end"/>
+        </ends-with>
+        <subzones>
+          <include syntax="self"/>
+        </subzones>
+      </zone>
+      <zone name="container.group.capturing.named">
+        <starts-with>
+          <!--
+            This regex really isn't ideal. It will match some things that
+            certainly aren't correct, such as `(?<abc<)` or `(?'abc>)`.
+          -->
+          <expression>(\(\?)P?('|&lt;)(\w+)(\2|>)</expression>
+          <capture number="0" name="group.capturing.named.begin"/>
+          <capture number="1" name="punctuation.group.capturing.named.begin"/>
+          <capture number="2" name="punctuation.capture-name.begin"/>
+          <capture number="3" name="capture-name"/>
+          <capture number="4" name="punctuation.capture-name.end"/>
+        </starts-with>
+        <ends-with>
+          <expression>\)</expression>
+          <capture number="0" name="punctuation.group.capturing.named.end"/>
+        </ends-with>
+        <subzones>
+          <include syntax="self"/>
+        </subzones>
+      </zone>
+      <zone name="container.group.capturing.numbered">
+        <starts-with>
+          <expression>\(</expression>
+          <capture number="0" name="punctuation.group.capturing.numbered.begin"/>
+        </starts-with>
+        <ends-with>
+          <expression>\)</expression>
+          <capture number="0" name="punctuation.group.capturing.numbered.end"/>
+        </ends-with>
+        <subzones>
+          <include syntax="self"/>
+        </subzones>
+      </zone>
+    </collection>
+    
+    <!-- ==============
+         = metadata.* =
+         ============== -->
+    
+    <collection name="comments">
+      <!-- a regex with(?# comments) -->
+      <!--
+        A bit of a hack, but I don't want the common idiom of utilizing a
+        comment to allow linebreaks to show up in the navigator.
+      -->
+      <zone name="linebreak-comment">
+        <starts-with>
+          <expression>\(\?#\n</expression>
+          <capture number="0" name="punctuation.linebreak-comment.begin"/>
+        </starts-with>
+        <ends-with>
+          <expression>\)</expression>
+          <capture number="0" name="punctuation.linebreak-comment.end"/>
+        </ends-with>
+      </zone>
+      <zone name="comment.inline">
+        <starts-with>
+          <expression>\(\?#</expression>
+          <capture number="0" name="punctuation.comment.begin"/>
+        </starts-with>
+        <ends-with>
+          <expression>\)</expression>
+          <capture number="0" name="punctuation.comment.end"/>
+        </ends-with>
+      </zone>
+    </collection>
+    
+    <collection name="invalids">
+      <!--
+        We're going to call linebreaks invalid outside of comments. You should
+        be using \n instead, anyway. If you really want to use a literal
+        linebreak, just escape it with a slash at the end of the previous line.
+      -->
+      <zone name="invalid.linebreak">
+        <expression>\n</expression>
+      </zone>
+    </collection>
+    
+    <!-- ==============
+         = operator.* =
+         ============== -->
+
+    <collection name="operators.character-classes">
+      <zone name="operator.character-class.any">
+        <expression>\.</expression>
+      </zone>
+    </collection>
+    
+    <collection name="escapes.operators">
+      <zone name="operator.anchor.escaped">
+        <expression>\\[GbByYmMAZz`'&lt;>]</expression>
+      </zone>
+    </collection>
+    
+    <collection name="operators">
+      <zone name="operator.alternator">
+        <expression>\|</expression>
+      </zone>
+      <zone name="operator.general.quantifier">
+        <expression>\?|\*|\+</expression>
+      </zone>
+      <zone name="operator.declarative.quantifier">
+        <expression>(\{)(\d*)(,)(\d*)(\})</expression>
+        <capture number="1" name="punctuation.declarative.quantifier.begin"/>
+        <capture number="2" name="numeric.declarative.quantifier.value.minimum"/>
+        <capture number="3" name="punctuation.declarative.quantifier.seperator"/>
+        <capture number="4" name="numeric.declarative.quantifier.value.maximum"/>
+        <capture number="5" name="punctuation.declarative.quantifier.end"/>
+      </zone>
+      <zone name="operator.anchor">
+        <expression>\^|\$</expression>
       </zone>
     </collection>
   </library>
