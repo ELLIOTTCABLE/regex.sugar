@@ -7,18 +7,21 @@ feature is only supported by a subset of the available regular expression
 engines, I attempt to support it as well as possible without conflicting with
 any alternatives provided by other engines.
 
-[espresso]: <http://macrabbit.com/espresso/> "The Espresso text editor, by MacRabbit"
-[regex]: <http://en.wikipedia.org/wiki/Regular_Expression> "Regular Expression as defined by Wikipedia"
-[reference]: <http://regular-expressions.info/reference.html> "Regular Expression Reference"
+  [espresso]: <http://macrabbit.com/espresso/>
+    "The Espresso text editor, by MacRabbit"
+  [regex]: <http://en.wikipedia.org/wiki/Regular_Expression>
+    "Regular Expression as defined by Wikipedia"
+  [reference]: <http://regular-expressions.info/reference.html>
+    "Regular Expression Reference"
 
 Using
 -----
 Clone this project somewhere, with the following:
-    
+
     git clone git://github.com/elliottcable/regex.sugar.git ./Regex.sugar
-    
+
 And then link it to your syntaxes directory:
-    
+
     mkdir -p "~/Library/Application Support/Espresso/Sugars/"
     ln -s "$(pwd)/Regex.sugar" "/Users/$(whoami)/Library/Application Support/Espresso/Sugars/"
     
@@ -27,4 +30,5 @@ TODO
 - Write a custom Itemizer class so that capture groups can show their capture
   number in the Navigator, just like how named capture groups will be capable
   of doing.
-- [Conditionals](http://regular-expressions.info/conditional.html "Regular Expression Conditionals")
+- [Conditionals](http://regular-expressions.info/conditional.html
+  "Regular Expression Conditionals")
