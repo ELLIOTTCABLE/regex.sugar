@@ -17,14 +17,14 @@
       <extension casesensitive="false">re</extension>
       <extension casesensitive="false">rgx</extension>
       <extension casesensitive="false">regex</extension>
+      <extension casesensitive="false">regexp</extension>
       <extension casesensitive="false">regularexpression</extension>
     </detectors>
-    
   </language>
   
   <meta>
     <name>Regex</name>
-    <description>Mostly meant for inclusion into other sugars, this sugar fully describes regular expressions, and allows you to break them down and modify them with ease</description>
+    <description>Mostly meant for inclusion into other sugars, this sugar fully describes regular expressions, and allows you to break them down and modify them with ease.</description>
     <author>elliottcable</author>
     <identifier>name.elliottcable.Sugar.Regex</identifier>
     <version status="release">1</version>
