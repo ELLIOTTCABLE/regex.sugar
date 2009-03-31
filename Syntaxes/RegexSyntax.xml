@@ -19,7 +19,6 @@
     <include collection="comments"/>
     <include collection="groups"/>
     <include collection="character-classes"/>
-    <include collection="operators.character-classes"/>
     <include collection="operators"/>
     <include collection="invalids"/>
   </zones>
@@ -126,6 +125,10 @@
           </zone>
         </subzones>
       </zone>
+      
+      <zone name="identifier.character-class.any">
+        <expression>\.</expression>
+      </zone>
     </collection>
     
     <!-- ===============
@@ -229,12 +232,6 @@
     <!-- ==============
          = operator.* =
          ============== -->
-
-    <collection name="operators.character-classes">
-      <zone name="operator.character-class.any">
-        <expression>\.</expression>
-      </zone>
-    </collection>
     
     <collection name="escapes.operators">
       <zone name="operator.anchor.escaped">
