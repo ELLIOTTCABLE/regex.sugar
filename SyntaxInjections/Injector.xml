@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <injections>
   
-	<injection name="injections.expression.regex.string-injector" selector="meta.hook.injector.expression.regex" action="replace-target">
-		<include syntax="expression.regex"/>
+	<injection name="name.elliottcable.Espresso.Injection.Regex.literal-injector" selector="meta.hook.injector.syntax.regex" action="replace-target">
+		<include syntax="name.elliottcable.Espresso.Syntax.Expression.Regex"/>
 	</injection>
 	
 </injections>

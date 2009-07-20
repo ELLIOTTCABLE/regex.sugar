@@ -11,7 +11,7 @@
     <name locale="ja">正規表現</name>
     <name locale="da">Regulære udtryk</name>
     
-    <root-zone>expression.regex</root-zone>
+    <root-zone>name.elliottcable.Espresso.Syntax.Expression.Regex</root-zone>
     
     <detectors>
       <extension casesensitive="false">re</extension>
@@ -26,7 +26,7 @@
     <name>Regex</name>
     <description>Mostly meant for inclusion into other sugars, this sugar fully describes regular expressions, and allows you to break them down and modify them with ease.</description>
     <author>elliottcable</author>
-    <identifier>name.elliottcable.Sugar.Regex</identifier>
+    <identifier>name.elliottcable.Espresso.Sugar.Regex</identifier>
     <version status="release">1</version>
     <download format="git">git://github.com/elliottcable/regex.sugar.git</download>
     <url>http://github.com/elliottcable/regex.sugar</url>

@@ -1,5 +1,5 @@
 <?xml version="1.0"?>
-<syntax name="expression.regex">
+<syntax name="name.elliottcable.Espresso.Syntax.Expression.Regex">
   <!--
     We break this document down into a huge library of collections, and an
     utterly simplistic primary zones section that does nothing more than
