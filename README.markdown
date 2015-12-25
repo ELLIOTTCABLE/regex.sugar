@@ -24,7 +24,13 @@ And then link it to your syntaxes directory:
 
     mkdir -p "$HOME/Library/Application Support/Espresso/Sugars/"
     ln -s "$(pwd)/Regex.sugar" "/Users/$(whoami)/Library/Application Support/Espresso/Sugars/"
-    
+
+This project is released for public usage under the terms of the very-permissive [ISC license][] (a
+modern evolution of the MIT / BSD licenses); more information is available in [COPYING][].
+
+   [ISC license]: <http://choosealicense.com/licenses/isc/> "Information about the ISC license"
+   [COPYING]: <./COPYING.text>
+
 TODO
 ----
 - Write a custom Itemizer class so that capture groups can show their capture
